@@ -1,0 +1,272 @@
+{% paginate collection.products by section.settings.num_products %}
+
+{% include 'breadcrumb' %}
+
+{% assign has_sidebar = false %}
+{% if collection.all_tags.size > 0 %}
+  {% assign has_sidebar = true %}
+{% endif %}
+
+<div class="grid grid-border text-center">
+
+  {% if has_sidebar %}
+  <div class="grid-item large--one-fifth collection-filters" id="collectionFilters">
+    {% include 'collection-sidebar' %}
+  </div>
+  {% endif %}
+
+  <div class="grid-item{% if has_sidebar %} large--four-fifths grid-border--left{% endif %}">
+
+    {% comment %}
+      Different markup if description is set
+    {% endcomment %}
+    {% if collection.description != blank %}
+      <header class="section-header">
+        <h1 class="section-header--title">{{ collection.title }}</h1>
+        <div class="rte rte--header">
+          {{ collection.description }}
+        </div>
+      </header>
+      <hr{% if has_sidebar %} class="hr--offset-left"{% endif %}>
+      <div class="section-header">
+        <div class="section-header--right">
+          {% include 'collection-sorting' %}
+          {% include 'collection-views' %}
+          {% include 'toggle-filters' %}
+        </div>
+      </div>
+    {% else %}
+    <header class="section-header">
+      <h1 class="section-header--title section-header--left">{{ collection.title }}</h1>
+      <div class="section-header--right">
+        {% include 'collection-sorting' %}
+        {% include 'collection-views' %}
+        {% include 'toggle-filters' %}
+      </div>
+    </header>
+    {% endif %}
+
+    <div class="grid-uniform">
+
+      {% for product in collection.products %}
+
+        {% include 'product-list-item' %}
+
+      {% else %}
+
+        <div class="grid-item">
+          <p>{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+  {% if paginate.pages > 1 %}
+  <div class="grid-item pagination-border-top">
+    <div class="grid">
+      <div class="grid-item{% if has_sidebar %} large--four-fifths push--large--one-fifth{% endif %}">
+          <div class="text-center">
+            {% include 'pagination-custom' %}
+          </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": {
+      "es": "Colección",
+      "it": "Collezione",
+      "en": "Collection",
+      "ja": "コレクション",
+      "fr": "Collection",
+      "de": "Kategorie",
+      "pt-BR": "Coleção"
+    },
+    "class": "collection-template-section",
+    "settings": [
+      {
+        "type": "select",
+        "id": "num_products",
+        "label": {
+          "es": "Productos por página",
+          "it": "Prodotti per pagina",
+          "en": "Products per page",
+          "ja": "ページあたりの商品数",
+          "fr": "Produits par page",
+          "de": "Produkte pro Seite",
+          "pt-BR": "Produtos por página"
+        },
+        "default": "20",
+        "options": [
+          {
+            "value": "10",
+            "label": {
+              "es": "10",
+              "it": "10",
+              "en": "10",
+              "ja": "10",
+              "fr": "10",
+              "de": "10",
+              "pt-BR": "10"
+            }
+          },
+          {
+            "value": "15",
+            "label": {
+              "es": "15",
+              "it": "15",
+              "en": "15",
+              "ja": "15",
+              "fr": "15",
+              "de": "15",
+              "pt-BR": "15"
+            }
+          },
+          {
+            "value": "20",
+            "label": {
+              "es": "20",
+              "it": "20",
+              "en": "20",
+              "ja": "20",
+              "fr": "20",
+              "de": "20",
+              "pt-BR": "20"
+            }
+          },
+          {
+            "value": "25",
+            "label": {
+              "es": "25",
+              "it": "25",
+              "en": "25",
+              "ja": "25",
+              "fr": "25",
+              "de": "25",
+              "pt-BR": "25"
+            }
+          },
+          {
+            "value": "30",
+            "label": {
+              "es": "30",
+              "it": "30",
+              "en": "30",
+              "ja": "30",
+              "fr": "30",
+              "de": "30",
+              "pt-BR": "30"
+            }
+          }
+        ]
+      },
+      {
+        "type": "radio",
+        "id": "collection_sidebar_filters",
+        "label": {
+          "es": "Filtros de productos de la barra lateral",
+          "it": "Filtri prodotto sidebar",
+          "en": "Sidebar product filters",
+          "ja": "サイドバーの商品絞り込み",
+          "fr": "Filtres de produits de la barre latérale",
+          "de": "Produktfilter in Seitenleiste",
+          "pt-BR": "Filtros de produto na barra lateral"
+        },
+        "options": [
+          {
+            "value": "tags",
+            "label": {
+              "es": "Por etiqueta",
+              "it": "Per tag",
+              "en": "By tag",
+              "ja": "タグ別",
+              "fr": "Par étiquette",
+              "de": "Nach Tag",
+              "pt-BR": "Por tag"
+            }
+          },
+          {
+            "value": "groups",
+            "label": {
+              "es": "Por grupo",
+              "it": "Per gruppo",
+              "en": "By group",
+              "ja": "グループ別",
+              "fr": "Par groupe",
+              "de": "Nach Gruppe",
+              "pt-BR": "Por grupo"
+            }
+          }
+        ],
+        "info": {
+          "es": "[Obtén información sobre cómo configurar los grupos de filtros](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific).",
+          "it": "[Scopri come configurare i gruppi di filtri](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific).",
+          "en": "[Learn how to set up filter groups](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific).",
+          "ja": "[フィルターグループの設定方法について、もっと詳しく](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific)。",
+          "fr": "[Apprenez à configurer les groupes de filtres](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific).",
+          "de": "[Erfahren Sie, wie Sie Filtergruppen einrichten](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific).",
+          "pt-BR": "[Saiba como criar grupos de filtros](https://help.shopify.com/manual/using-themes/themes-by-shopify/supply#product-tips-tips-specific)."
+        }
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_compare_at_price",
+        "label": {
+          "es": "Mostrar precio de comparación",
+          "it": "Mostra Confronta al prezzo",
+          "en": "Show compare at price",
+          "ja": "価格比較を表示する",
+          "fr": "Afficher le prix normal",
+          "de": "Vergleich zum Preis anzeigen",
+          "pt-BR": "Exibir comparação de preço"
+        },
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_saved_amount",
+        "label": {
+          "es": "Mostrar monto ahorrado",
+          "it": "Mostra importo risparmiato",
+          "en": "Show saved amount",
+          "ja": "保存された金額を表示",
+          "fr": "Afficher le montant économisé",
+          "de": "Gesparten Betrag anzeigen",
+          "pt-BR": "Exibir valor salvo"
+        },
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_reviews_enable",
+        "label": {
+          "es": "Habilitar reseñas de productos",
+          "it": "Abilita recensioni di prodotto",
+          "en": "Enable product reviews",
+          "ja": "商品レビューを有効にする",
+          "fr": "Activer les avis sur les produits",
+          "de": "Produktbewertungen aktivieren",
+          "pt-BR": "Habilitar as avaliações de produtos"
+        },
+        "info": {
+          "es": "Instala la app gratis de Shopify [Reseñas de productos](https://apps.shopify.com/product-reviews) para agregar reseñas de productos.",
+          "it": "Installa l'app gratuita di Shopify [Recensioni Prodotto](https://apps.shopify.com/product-reviews) per aggiungere delle recensioni di prodotto.",
+          "en": "Install the free Shopify [Product Reviews](https://apps.shopify.com/product-reviews) app to add product reviews.",
+          "ja": "無料のShopify[商品レビュー](https://apps.shopify.com/product-reviews)をインストールしてください商品レビューを追加するためのアプリです。",
+          "fr": "Installer l'application Shopify gratuite [Product Reviews](https://apps.shopify.com/product-reviews) pour ajouter des avis sur les produits.",
+          "de": "Installieren Sie die kostenlose Shopify-App [Product Reviews](https://apps.shopify.com/product-reviews), um Produktbewertungen hinzuzufügen.",
+          "pt-BR": "Instale o app gratuito da Shopify [Avaliações de Produtos](https://apps.shopify.com/product-reviews) para adicionar avaliações de produtos."
+        }
+      }
+    ]
+  }
+{% endschema %}

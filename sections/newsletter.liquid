@@ -1,0 +1,108 @@
+<hr>
+<div class="text-centre">
+  <div class="section-header text-center">
+    {% if section.settings.heading != blank %}
+      <label for="Email" class="h1">{{ section.settings.heading | escape }}</label>
+    {% endif %}
+    {% unless section.settings.subtext == blank %}
+      {{ section.settings.subtext }}
+    {% endunless %}
+  </div>
+  {% include 'newsletter-form' %}
+</div>
+
+
+{% schema %}
+  {
+    "name": {
+      "es": "Boletín",
+      "it": "Newsletter",
+      "en": "Newsletter",
+      "ja": "ニュースレター",
+      "fr": "Newsletter",
+      "de": "Newsletter",
+      "pt-BR": "Newsletter"
+    },
+    "class": "newsletter-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": {
+          "es": "Título",
+          "it": "Heading",
+          "en": "Heading",
+          "ja": "見出し",
+          "fr": "Titre",
+          "de": "Titel",
+          "pt-BR": "Título"
+        },
+        "default": {
+          "es": "Suscríbete a nuestro boletín de noticias",
+          "it": "Iscriviti alla nostra newsletter",
+          "en": "Subscribe to our newsletter",
+          "ja": "ストアからのお知らせを受け取る",
+          "fr": "S'inscrire à la newsletter",
+          "de": "Unseren Newsletter abonnieren",
+          "pt-BR": "Receber nosso newsletter"
+        }
+      },
+      {
+        "type": "richtext",
+        "id": "subtext",
+        "label": {
+          "es": "Subtexto",
+          "it": "Sottotesto",
+          "en": "Subtext",
+          "ja": "サブテキスト",
+          "fr": "Sous-texte",
+          "de": "Subtext",
+          "pt-BR": "Subtexto"
+        },
+        "default": {
+          "es": "<p>Promociones, nuevos productos y ventas. Directamente a tu bandeja de entrada.</p>",
+          "it": "<p>Promozioni, nuovi prodotti e offerte. Direttamente nella tua inbox.</p>",
+          "en": "<p>Promotions, new products and sales. Directly to your inbox.</p>",
+          "ja": "<p>プロモーション、新商品、セールについて、あなたの受信箱に直接知らせる。</p>",
+          "fr": "<p>Promotions, nouveaux produits et soldes. Directement dans votre boîte de réception.</p>",
+          "de": "<p>Werbeaktionen, neue Produkte und Sonderangebote. Direkt in Ihrem Posteingang.</p>",
+          "pt-BR": "<p>Promoções, novos produtos e ofertas, diretamente em sua caixa de entrada.</p>"
+        }
+      },
+      {
+        "type": "paragraph",
+        "content": {
+          "es": "Todos los clientes que se registren tendrán una cuenta creada para ellos en Shopify. [Ver clientes](/admin/customers?query=&accepts_marketing=1)",
+          "it": "Qualsiasi cliente che si iscrive avrà un account creato appositamente su Shopify. [Visualizza clienti](/admin/customers?query=&accepts_marketing=1)",
+          "en": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)",
+          "ja": "サインアップしたお客様は、Shopifyでアカウントが作成されます。[お客様を表示](/admin/customers?query=&accepts_marketing=1)",
+          "fr": "Les clients qui s'inscrivent auront un compte créé pour eux dans Shopify. [Afficher les clients](/admin/customers?query=&accepts_marketing=1)",
+          "de": "Für alle Kunden, die sich anmelden, wird in Shopify ein Konto erstellt. [Kunden anzeigen](/admin/customers?query=&accepts_marketing=1)",
+          "pt-BR": "Todos os clientes que se inscreverem terão uma conta criada para eles na Shopify. [Ver clientes](/admin/customers?query=&accepts_marketing=1)"
+        }
+      }
+    ],
+    "presets": [
+      {
+        "name": {
+          "es": "Boletín",
+          "it": "Newsletter",
+          "en": "Newsletter",
+          "ja": "ニュースレター",
+          "fr": "Newsletter",
+          "de": "Newsletter",
+          "pt-BR": "Newsletter"
+        },
+        "category": {
+          "es": "Promocional",
+          "it": "Promozionale",
+          "en": "Promotional",
+          "ja": "プロモーション用",
+          "fr": "Promotionnel",
+          "de": "Promotional",
+          "pt-BR": "Promocional"
+        }
+      }
+    ]
+  }
+{% endschema %}
