@@ -1,2 +1,5 @@
 config.yml
 config/settings_data.json
+*.jpg
+*.png
+*.gif
